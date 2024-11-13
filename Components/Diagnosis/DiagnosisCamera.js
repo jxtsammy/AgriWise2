@@ -7,13 +7,14 @@ import Icon from 'react-native-vector-icons/Ionicons';
 const PlantDiagnosisScreen = ({ navigation }) => {
   const cameraRef = useRef(null);
 
-  const takePicture = async () => {
+  const takePictureAndNavigate = async () => {
     if (cameraRef.current) {
       try {
         const options = { quality: 0.8, base64: true };
         const data = await cameraRef.current.takePictureAsync(options);
         Alert.alert("Picture Taken", "Image captured successfully!");
         console.log(data.uri); // You can use the data.uri to display or save the image
+        navigation.navigate('DiagnosisDetails');
       } catch (error) {
         console.error(error);
         Alert.alert("Error", "Failed to capture image.");
@@ -54,7 +55,7 @@ const PlantDiagnosisScreen = ({ navigation }) => {
         <TouchableOpacity>
           <Icon name="image-outline" size={30} color="white" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.captureButton} onPress={[takePicture,navigation.navigate('DiagnosisDetails')]}>
+        <TouchableOpacity style={styles.captureButton} onPress={takePictureAndNavigate}>
           <View style={styles.captureInner} />
         </TouchableOpacity>
         <TouchableOpacity>

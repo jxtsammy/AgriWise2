@@ -14,8 +14,6 @@ import Appointments from '../AppointmentScreen/Appointment'
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-// Simple ProfileScreen component
-const ProfileScreen = () => <></>;
 
 // Create stack navigators for each tab if needed
 const HomeStack = () => {
@@ -93,7 +91,7 @@ const App = () => {
           }}
         />
         <Tab.Screen
-          name="Profile"
+          name="Appointment"
           component={AppointmentStack}
           options={{
             tabBarIcon: ({ color, size }) => (
