@@ -313,7 +313,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   signUpButtonDisabled: {
-    backgroundColor: '#088a6a',
+    backgroundColor: '#cccc',
   },
   signUpButtonText: {
     color: '#fff',
