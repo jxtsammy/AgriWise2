@@ -1,15 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions } from 'react-native';
-import { createDrawerNavigator, DrawerContentScrollView } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
+import { DrawerContentScrollView } from '@react-navigation/drawer';
 import { MaterialIcons } from '@expo/vector-icons';
 
-const Drawer = createDrawerNavigator();
 
 // Custom Drawer Content Component
 const CustomDrawerContent = (props) => {
   const menuItems = [
-    { icon: 'event', title: 'Appointment booking' },
+    { icon: 'event', title: 'Appointment' },
     { icon: 'notifications', title: 'Notification' },
     { icon: 'feed', title: 'News' },
     { icon: 'history', title: 'Order history' },
@@ -53,38 +51,9 @@ const CustomDrawerContent = (props) => {
   );
 };
 
-// Placeholder Screens
-const PlaceholderScreen = ({ route }) => (
-  <View style={styles.screenContainer}>
-    <Text>{route.name} Screen</Text>
-  </View>
-);
 
 // Main App Component
-const App = () => {
-  return (
-    <NavigationContainer>
-      <Drawer.Navigator
-        drawerContent={(props) => <CustomDrawerContent {...props} />}
-        screenOptions={{
-          drawerStyle: {
-            width: Dimensions.get('window').width * 0.85,
-          },
-          headerShown: true,
-          headerStyle: {
-            backgroundColor: '#fff',
-          },
-        }}
-      >
-        <Drawer.Screen name="Appointment booking" component={PlaceholderScreen} options={{ headerShown: false }}/>
-        <Drawer.Screen name="Notification" component={Notifications} options={{ headerShown: false }}/>
-        <Drawer.Screen name="News" /*component={PlaceholderScreen} options={{ headerShown: false }}*//>
-        <Drawer.Screen name="Order history" /*component={PlaceholderScreen} options={{ headerShown: false }}*//>
-        <Drawer.Screen name="Settings" /*component={PlaceholderScreen} options={{ headerShown: false }}*//>
-      </Drawer.Navigator>
-    </NavigationContainer>
-  );
-};
+
 
 const styles = StyleSheet.create({
   drawerContent: {
@@ -133,11 +102,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#333',
   },
-  screenContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
 });
 
-export default App;
+export default CustomDrawerContent;

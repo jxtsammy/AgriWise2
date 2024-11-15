@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { createDrawerNavigator} from '@react-navigation/drawer';
+import CustomDrawer from '../Drawer&AppointmentScreens/Drawer'
+import Appointment from '../Drawer&AppointmentScreens/Appointment'
+import Notifications from '../Community&NotificationScreens/Notification'
+
+const Drawer = createDrawerNavigator();
 
 const { width } = Dimensions.get('window');
 const CARD_WIDTH = width - 32; // Full width minus padding
@@ -49,7 +55,7 @@ const WeatherCard = () => (
   </View>
 );
 
-const App = ({navigation}) => {
+const Home = ({navigation}) => {
   const [activeNewsIndex, setActiveNewsIndex] = useState(0);
 
   const crops = [
@@ -95,7 +101,9 @@ const App = ({navigation}) => {
       {/* Header */}
       <View style={styles.header}>
         <View style={styles.headerLeft}>
-          <Icon name="menu" size={24} color="#fff" />
+        <TouchableOpacity onPress={() => navigation.openDrawer()}>
+        <Icon name="menu" size={24} color="#fff" />
+        </TouchableOpacity>
           <Text style={styles.headerTitle}>AgriWise</Text>
         </View>
         <TouchableOpacity onPress={() => navigation.navigate('Notifications')}>
@@ -185,6 +193,28 @@ const App = ({navigation}) => {
         </View>
       </ScrollView>
     </SafeAreaView>
+  );
+};
+
+const App = () => {
+  return (
+      <Drawer.Navigator
+        drawerContent={(props) => <CustomDrawer {...props} />}
+        screenOptions={{
+          drawerStyle: {
+            width: Dimensions.get('window').width * 0.85,
+          },
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          drawerType: 'front',
+        }}
+      >
+      <Drawer.Screen name="Home" component={Home} options={{ headerShown: false }}/>
+        <Drawer.Screen name="Appointment" component={Appointment} options={{ headerShown: false }}/>
+        <Drawer.Screen name="Notification" component={Notifications} options={{ headerShown: false }}/>
+      </Drawer.Navigator>
   );
 };
 
