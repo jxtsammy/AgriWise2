@@ -47,7 +47,7 @@ const OTPVerificationScreen = ({ navigation }) => {
     const otpCode = otp.join('');
     console.log("OTP Entered:", otpCode);
     // Add OTP verification logic here
-    navigation.navigate('Home')
+    navigation.navigate('NavBar')
   };
 
   return (

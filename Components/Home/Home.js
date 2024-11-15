@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { createDrawerNavigator} from '@react-navigation/drawer';
 import CustomDrawer from '../Drawer&AppointmentScreens/Drawer'
-import Appointment from '../Drawer&AppointmentScreens/Appointment'
+import Appointment from '../AppointmentScreen/Appointment'
 import Notifications from '../Community&NotificationScreens/Notification'
 
 const Drawer = createDrawerNavigator();
