@@ -20,9 +20,9 @@ const SignUpScreen = ({ navigation }) => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleSignUp = () => {
+  const handleLogin = () => {
     console.log('Sign up:', { email, password });
-    navigation.navigate('Verification')
+    navigation.navigate('LoginVerification')
   };
 
   const togglePasswordVisibility = () => {
@@ -108,7 +108,7 @@ const SignUpScreen = ({ navigation }) => {
 
                 <TouchableOpacity
                   style={styles.logInButton}
-                  onPress={handleSignUp}
+                  onPress={handleLogin}
                 >
                   <Text style={styles.logInButtonText}>Log In</Text>
                 </TouchableOpacity>

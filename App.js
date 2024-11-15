@@ -6,7 +6,8 @@ import CommunityInfo from './Components/OnboardingScreens/CommunityInfo'
 import CultivationTips from './Components/OnboardingScreens/CultivationTips'
 import Login from './Components/LoginSignUpScreens/LogIn'
 import SignUp from './Components/LoginSignUpScreens/SignUp'
-import Verification from './Components/LoginSignUpScreens/OTPVerification'
+import LoginVerification from './Components/LoginSignUpScreens/LoginVerification'
+import SignUpVerification from './Components/LoginSignUpScreens/SignUpVerificationVerification'
 import CropSelection from './Components/SelectionScreen/CropSelection'
 import Home from './Components/Home/Home'
 import Store from './Components/Store/StoreScreen'
@@ -54,8 +55,13 @@ const App = () => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Verification"
-          component={Verification}
+          name="LoginVerification"
+          component={LoginVerification}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="SignUpVerification"
+          component={SignUpVerification}
           options={{ headerShown: false }}
         />
         <Stack.Screen

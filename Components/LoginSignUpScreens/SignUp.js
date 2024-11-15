@@ -38,7 +38,7 @@ const SignUpScreen = ({ navigation }) => {
       password,
       agreeToTerms
     });
-  navigation.navigate('Verification')
+  navigation.navigate('SignUpVerification')
   };
 
   const togglePasswordVisibility = () => {
