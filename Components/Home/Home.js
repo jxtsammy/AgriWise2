@@ -97,7 +97,7 @@ const Home = ({navigation}) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
         <View style={styles.headerLeft}>
@@ -192,7 +192,7 @@ const Home = ({navigation}) => {
           <WeatherCard />
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -228,8 +228,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: '#088a6a',
-    padding: 20,
-    paddingTop: 30
+    padding: 15,
+    paddingTop: 55
   },
   headerLeft: {
     flexDirection: 'row',
