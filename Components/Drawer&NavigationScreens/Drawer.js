@@ -32,8 +32,8 @@ const CustomDrawerContent = (props) => {
             style={styles.avatar}
           />
         </View>
-        <Text style={styles.name}>Raj kumar BL</Text>
-        <Text style={styles.email}>Rajkumarb007@gmail.com</Text>
+        <Text style={styles.name}>Sallo Samuel</Text>
+        <Text style={styles.email}>robertflames001@gmail.com</Text>
       </View>
 
       {/* Menu Items */}
