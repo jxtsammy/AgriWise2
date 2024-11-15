@@ -14,7 +14,7 @@ import Store from './Components/Store/StoreScreen'
 import ProductDetails from './Components/Store/ProductDetails'
 import Community from './Components/Community&NotificationScreens/Community'
 import Notifications from './Components/Community&NotificationScreens/Notification'
-import NavBar from './Components/Drawer&AppointmentScreens/navigationBar'
+import NavBar from './Components/Drawer&NavigationScreens/navigationBar'
 import Appointment from './Components/AppointmentScreen/Appointment'
 import DiagnosisDetails from './Components/Diagnosis/DiagnosisInfo';
 import Camera from './Components/Diagnosis/DiagnosisCamera'
