@@ -11,10 +11,9 @@ import {
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
-// Adjusted width calculation to account for padding
 const SCREEN_WIDTH = Dimensions.get('window').width;
-const CONTAINER_PADDING = 24; // Increased padding
-const GRID_SPACING = 12; // Increased spacing between items
+const CONTAINER_PADDING = 24;
+const GRID_SPACING = 12;
 const NUM_COLUMNS = 4;
 const ITEM_WIDTH = (SCREEN_WIDTH - (CONTAINER_PADDING * 2) - (NUM_COLUMNS - 1) * GRID_SPACING) / NUM_COLUMNS;
 
@@ -109,7 +108,10 @@ const CropSelector = ({ onNext, onSkip, navigation }) => {
 
         <View style={styles.buttonContainer}>
           <TouchableOpacity
-            onPress={[onSkip]}
+            onPress={() => {
+              onSkip?.();
+              navigation.navigate('Home');
+            }}
             style={styles.skipButton}
           >
             <Text style={styles.skipButtonText}>Skip</Text>
@@ -149,13 +151,13 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   title: {
-    fontSize: 24, // Increased font size
+    fontSize: 24,
     fontWeight: '600',
     marginBottom: 8,
     color: '#111827',
   },
   subtitle: {
-    fontSize: 16, // Increased font size
+    fontSize: 16,
     color: '#6B7280',
   },
   searchContainer: {
@@ -190,14 +192,13 @@ const styles = StyleSheet.create({
   cropItem: {
     width: ITEM_WIDTH,
     aspectRatio: 1,
-    borderRadius: 12, // Increased border radius
+    borderRadius: 12,
     borderWidth: 1,
     borderColor: '#E5E7EB',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 12,
     backgroundColor: '#FFFFFF',
-    // Added shadow
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -214,7 +215,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ECFDF5',
   },
   cropIcon: {
-    fontSize: 36, // Increased size
+    fontSize: 36,
     marginBottom: 8,
   },
   cropName: {
@@ -241,7 +242,7 @@ const styles = StyleSheet.create({
   },
   nextButton: {
     backgroundColor: '#088A6A',
-    paddingHorizontal:50,
+    paddingHorizontal: 50,
     paddingVertical: 10,
     borderRadius: 10,
   },
