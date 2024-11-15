@@ -16,29 +16,58 @@ import {
 import { Feather } from '@expo/vector-icons';
 import CountryPicker from 'react-native-country-picker-modal';
 
+const ghanaRegions = [
+  'Ahafo',
+  'Ashanti',
+  'Bono',
+  'Bono East',
+  'Central',
+  'Eastern',
+  'Greater Accra',
+  'Northern',
+  'North East',
+  'Oti',
+  'Savannah',
+  'Upper East',
+  'Upper West',
+  'Volta',
+  'Western',
+  'Western North'
+];
+
 const SignUpScreen = ({ navigation }) => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
+  const [isFarmer, setIsFarmer] = useState(false);
+  const [gender, setGender] = useState('');
+  const [location, setLocation] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [countryCode, setCountryCode] = useState('IN');
-  const [callingCode, setCallingCode] = useState('91');
+  const [countryCode, setCountryCode] = useState('GH');
+  const [callingCode, setCallingCode] = useState('233');
   const [showCountryPicker, setShowCountryPicker] = useState(false);
   const [agreeToTerms, setAgreeToTerms] = useState(false);
 
   const onSelectCountry = (country) => {
     setCountryCode(country.cca2);
     setCallingCode(country.callingCode[0]);
+    setLocation('');
   };
 
   const handleSignUp = () => {
     console.log('Sign up:', {
+      firstName,
+      lastName,
       email,
       phone: `+${callingCode}${phone}`,
       password,
-      agreeToTerms
+      isFarmer,
+      gender,
+      location,
+      agreeToTerms,
     });
-  navigation.navigate('SignUpVerification')
   };
 
   const togglePasswordVisibility = () => {
@@ -57,10 +86,6 @@ const SignUpScreen = ({ navigation }) => {
             showsVerticalScrollIndicator={false}
             bounces={false}
           >
-            {/* Previous code remains the same until phone input container */}
-
-
-
             <View style={styles.content}>
               <Image
                 source={require('../../assets/SignUpImg.png')}
@@ -73,7 +98,31 @@ const SignUpScreen = ({ navigation }) => {
 
               <View style={styles.form}>
                 <View style={styles.inputContainer}>
-                  <Text style={styles.label}>Enter your email Id</Text>
+                  <Text style={styles.label}>First Name</Text>
+                  <TextInput
+                    style={styles.input}
+                    value={firstName}
+                    onChangeText={setFirstName}
+                    placeholder="Enter your first name"
+                    placeholderTextColor="#333"
+                    returnKeyType="next"
+                  />
+                </View>
+
+                <View style={styles.inputContainer}>
+                  <Text style={styles.label}>Last Name</Text>
+                  <TextInput
+                    style={styles.input}
+                    value={lastName}
+                    onChangeText={setLastName}
+                    placeholder="Enter your last name"
+                    placeholderTextColor="#333"
+                    returnKeyType="next"
+                  />
+                </View>
+
+                <View style={styles.inputContainer}>
+                  <Text style={styles.label}>Email</Text>
                   <TextInput
                     style={styles.input}
                     value={email}
@@ -87,7 +136,7 @@ const SignUpScreen = ({ navigation }) => {
                 </View>
 
                 <View style={styles.inputContainer}>
-                  <Text style={styles.label}>Enter your phone number</Text>
+                  <Text style={styles.label}>Phone Number</Text>
                   <View style={styles.phoneInputContainer}>
                     <TouchableOpacity
                       style={styles.countryPickerButton}
@@ -97,12 +146,11 @@ const SignUpScreen = ({ navigation }) => {
                         withFilter
                         withFlag
                         withCallingCode
-                        withAlphaFilter
-                        withCallingCodeButton
                         countryCode={countryCode}
                         visible={showCountryPicker}
                         onSelect={onSelectCountry}
                         onClose={() => setShowCountryPicker(false)}
+                        countryCodes={['GH', 'NG']}
                       />
                       <Feather name="chevron-down" size={20} color="#088a6a" />
                     </TouchableOpacity>
@@ -115,14 +163,13 @@ const SignUpScreen = ({ navigation }) => {
                       placeholderTextColor="#333"
                       keyboardType="phone-pad"
                       maxLength={10}
-                      returnKeyType="done"
+                      returnKeyType="next"
                     />
                   </View>
                 </View>
 
-                {/* New Password Input Container */}
                 <View style={styles.inputContainer}>
-                  <Text style={styles.label}>Enter your password</Text>
+                  <Text style={styles.label}>Password</Text>
                   <View style={styles.passwordContainer}>
                     <TextInput
                       style={styles.passwordInput}
@@ -131,14 +178,14 @@ const SignUpScreen = ({ navigation }) => {
                       placeholder="Enter your password"
                       placeholderTextColor="#333"
                       secureTextEntry={!showPassword}
-                      returnKeyType="done"
+                      returnKeyType="next"
                     />
                     <TouchableOpacity
                       style={styles.eyeIcon}
                       onPress={togglePasswordVisibility}
                     >
                       <Feather
-                        name={showPassword ? "eye" : "eye-off"}
+                        name={showPassword ? 'eye' : 'eye-off'}
                         size={20}
                         color="#088a6a"
                       />
@@ -146,7 +193,73 @@ const SignUpScreen = ({ navigation }) => {
                   </View>
                 </View>
 
-                {/* Rest of the code remains the same */}
+                <View style={styles.inputContainer}>
+                  <Text style={styles.label}>Are you a farmer?</Text>
+                  <View style={styles.radioContainer}>
+                    <TouchableOpacity
+                      style={[styles.radio, isFarmer && styles.radioSelected]}
+                      onPress={() => setIsFarmer(true)}
+                    >
+                      <Text style={styles.radioText}>Yes</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={[styles.radio, !isFarmer && styles.radioSelected]}
+                      onPress={() => setIsFarmer(false)}
+                    >
+                      <Text style={styles.radioText}>No</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+
+                <View style={styles.inputContainer}>
+                  <Text style={styles.label}>Gender</Text>
+                  <View style={styles.radioContainer}>
+                    <TouchableOpacity
+                      style={[styles.radio, gender === 'male' && styles.radioSelected]}
+                      onPress={() => setGender('male')}
+                    >
+                      <Text style={styles.radioText}>Male</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={[styles.radio, gender === 'female' && styles.radioSelected]}
+                      onPress={() => setGender('female')}
+                    >
+                      <Text style={styles.radioText}>Female</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+
+                {countryCode === 'GH' && (
+                  <View style={styles.inputContainer}>
+                    <Text style={styles.label}>Region</Text>
+                    <View style={styles.pickerContainer}>
+                      <ScrollView 
+                        horizontal 
+                        showsHorizontalScrollIndicator={false}
+                        style={styles.regionPicker}
+                      >
+                        {ghanaRegions.map((region) => (
+                          <TouchableOpacity
+                            key={region}
+                            style={[
+                              styles.regionButton,
+                              location === region && styles.regionButtonSelected
+                            ]}
+                            onPress={() => setLocation(region)}
+                          >
+                            <Text style={[
+                              styles.regionButtonText,
+                              location === region && styles.regionButtonTextSelected
+                            ]}>
+                              {region}
+                            </Text>
+                          </TouchableOpacity>
+                        ))}
+                      </ScrollView>
+                    </View>
+                  </View>
+                )}
+
                 <View style={styles.termsContainer}>
                   <TouchableOpacity
                     style={styles.checkbox}
@@ -165,7 +278,7 @@ const SignUpScreen = ({ navigation }) => {
                 <TouchableOpacity
                   style={[
                     styles.signUpButton,
-                    !agreeToTerms && styles.signUpButtonDisabled
+                    !agreeToTerms && styles.signUpButtonDisabled,
                   ]}
                   onPress={handleSignUp}
                   disabled={!agreeToTerms}
@@ -189,29 +302,6 @@ const SignUpScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  // ... Previous styles remain the same ...
-
-  // Add these new styles
-  passwordContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    height: 48,
-    borderWidth: 1,
-    borderColor: '#333',
-    borderRadius: 8,
-    backgroundColor: '#fff',
-  },
-  passwordInput: {
-    flex: 1,
-    height: '100%',
-    paddingHorizontal: 16,
-  },
-  eyeIcon: {
-    padding: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -224,113 +314,177 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    paddingHorizontal: 24,
+    padding: 20,
   },
   image: {
     width: '100%',
-    height: 250,
-    marginBottom: 5
+    height: 200,
+    marginBottom: 20,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 8,
-    textAlign: 'center'
+    color: '#000',
   },
   subtitle: {
     fontSize: 16,
     color: '#666',
-    marginBottom: 32,
-    textAlign: 'center'
+    marginBottom: 24,
   },
   form: {
-    flex: 1,
+    gap: 16,
   },
   inputContainer: {
-    marginBottom: 24,
+    gap: 8,
   },
   label: {
     fontSize: 14,
+    color: '#333',
     fontWeight: '500',
-    marginBottom: 8,
   },
   input: {
-    height: 48,
     borderWidth: 1,
-    borderColor: '#333',
+    borderColor: '#ddd',
     borderRadius: 8,
-    paddingHorizontal: 16,
+    padding: 12,
+    fontSize: 16,
+    color: '#000',
   },
   phoneInputContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
-    height: 48,
-    borderWidth: 1,
-    borderColor: '#333',
-    borderRadius: 8,
+    gap: 8,
   },
   countryPickerButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: '100%',
-    paddingHorizontal: 12,
-    borderRightWidth: 1,
-    borderColor: '#333',
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 8,
+    padding: 12,
+    gap: 8,
   },
   phoneInput: {
     flex: 1,
-    height: '100%',
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 8,
+    padding: 12,
+    fontSize: 16,
+    color: '#000',
+  },
+  passwordContainer: {
+    flexDirection: 'row',
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 8,
+    overflow: 'hidden',
+  },
+  passwordInput: {
+    flex: 1,
+    padding: 12,
+    fontSize: 16,
+    color: '#000',
+  },
+  eyeIcon: {
+    padding: 12,
+    justifyContent: 'center',
+  },
+  radioContainer: {
+    flexDirection: 'row',
+    gap: 16,
+  },
+  radio: {
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 8,
+    padding: 12,
+    minWidth: 80,
+    alignItems: 'center',
+  },
+  radioSelected: {
+    backgroundColor: '#088a6a',
+    borderColor: '#088a6a',
+  },
+  radioText: {
+    color: '#333',
+    fontSize: 16,
+  },
+  pickerContainer: {
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 8,
+    overflow: 'hidden',
+  },
+  regionPicker: {
+    padding: 8,
+  },
+  regionButton: {
     paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 20,
+    marginHorizontal: 4,
+    backgroundColor: '#f0f0f0',
+  },
+  regionButtonSelected: {
+    backgroundColor: '#088a6a',
+  },
+  regionButtonText: {
+    color: '#333',
+    fontSize: 14,
+  },
+  regionButtonTextSelected: {
+    color: '#fff',
   },
   termsContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
+    gap: 8,
   },
   checkbox: {
     width: 20,
     height: 20,
     borderWidth: 1,
-    borderColor: '#088a6a',
+    borderColor: '#00A67E',
     borderRadius: 4,
-    marginRight: 12,
     justifyContent: 'center',
     alignItems: 'center',
   },
   termsText: {
     fontSize: 14,
-    flex: 1,
+    color: '#666',
   },
   termsLink: {
-    color: '#088a6a',
+    color: '#00A67E',
+    textDecorationLine: 'underline',
   },
   signUpButton: {
-    height: 48,
-    backgroundColor: '#088a6a',
+    backgroundColor: '#00A67E',
     borderRadius: 8,
-    justifyContent: 'center',
+    padding: 16,
     alignItems: 'center',
-    marginBottom: 10,
+    marginTop: 24,
   },
   signUpButtonDisabled: {
-    backgroundColor: '#cccc',
   },
   signUpButtonText: {
     color: '#fff',
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: '600',
   },
   loginContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
+    marginTop: 16,
   },
   loginText: {
     color: '#666',
+    fontSize: 14,
   },
   loginLink: {
-    color: '#088a6a',
-    fontWeight: '500',
+    color: '#00A67E',
+    fontSize: 14,
+    fontWeight: '600',
   },
 });
 

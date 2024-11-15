@@ -12,14 +12,14 @@ import {
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const AppointmentBooking = ({ navigation }) => {
-  const [state, setState] = useState('Tamil Nadu');
-  const [district, setDistrict] = useState('Coimbatore');
+  const [state, setState] = useState('Daniel Amoako Kodua');
+  const [district, setDistrict] = useState('Accra');
   const [visitType, setVisitType] = useState('visit');
   const [problem, setProblem] = useState('');
 
   // Sample data
-  const states = ['Tamil Nadu', 'Kerala', 'Karnataka', 'Andhra Pradesh'];
-  const districts = ['Coimbatore', 'Chennai', 'Madurai', 'Salem', 'Trichy'];
+  const states = ['Greater Accra', 'Ashanti Region', 'Volta Region', 'Western Region', 'Eastern Region'];
+  const districts = ['Accra', 'Kumasi', 'Ho', 'Takoradi', 'Koforidua'];
 
   const handleSubmit = () => {
     console.log({
@@ -106,7 +106,7 @@ const AppointmentBooking = ({ navigation }) => {
           <View style={styles.form}>
             {/* State Selection */}
             <CustomDropdown
-              label="Select the State"
+              label="Select the Region"
               value={state}
               items={states}
               onValueChange={setState}
@@ -115,7 +115,7 @@ const AppointmentBooking = ({ navigation }) => {
 
             {/* District Selection */}
             <CustomDropdown
-              label="Select the District"
+              label="Select the City"
               value={district}
               items={districts}
               onValueChange={setDistrict}

@@ -32,8 +32,13 @@ const CustomDrawerContent = (props) => {
             style={styles.avatar}
           />
         </View>
+<<<<<<< HEAD:Components/Drawer&NavigationScreens/Drawer.js
         <Text style={styles.name}>Sallo Samuel</Text>
         <Text style={styles.email}>robertflames001@gmail.com</Text>
+=======
+        <Text style={styles.name}>Daniel Amoako Kodua</Text>
+        <Text style={styles.email}>officialjwise20@gmail.com</Text>
+>>>>>>> 2e56397 (Added more form fields to the sign up screen):Components/Drawer&AppointmentScreens/Drawer.js
       </View>
 
       {/* Menu Items */}

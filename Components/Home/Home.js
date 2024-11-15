@@ -10,7 +10,7 @@ import Notifications from '../Community&NotificationScreens/Notification'
 const Drawer = createDrawerNavigator();
 
 const { width } = Dimensions.get('window');
-const CARD_WIDTH = width - 32; // Full width minus padding
+const CARD_WIDTH = width - 32;
 
 const CropItem = ({ emoji, name }) => (
   <View style={styles.cropItem}>

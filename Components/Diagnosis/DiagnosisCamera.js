@@ -14,7 +14,6 @@ const PlantDiagnosisScreen = ({ navigation }) => {
         const data = await cameraRef.current.takePictureAsync(options);
         Alert.alert("Picture Taken", "Image captured successfully!");
         console.log(data.uri); // You can use the data.uri to display or save the image
-        navigation.navigate('DiagnosisDetails');
       } catch (error) {
         console.error(error);
         Alert.alert("Error", "Failed to capture image.");
